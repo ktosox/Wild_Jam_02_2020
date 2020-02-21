@@ -6,39 +6,34 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;	
-uniform float blur_size = 0.0 ;
-uniform float range = 4.0;
+
 render_mode blend_mix;	
 	
 	
 	
-void fragment() {	
+uniform float lod: hint_range(0, 2);
 
-	vec4 col = vec4(0.0);
-        //vec2 uv = UV + vec2((index/9.0 - 0.5) * blur_size * invAspect, 0);
-        //add color at position to color
-		for (float i = 1.0;i<range;i++){
-			 col += texture(TEXTURE, UV+vec2(0,blur_size*i));
-			 col += texture(TEXTURE, UV+vec2(0,-blur_size));
-			 col += texture(TEXTURE, UV+vec2(blur_size,0));
-			 col += texture(TEXTURE, UV+vec2(-blur_size,0));
-			 col += texture(TEXTURE, UV+vec2(-blur_size,-blur_size));
-			 col += texture(TEXTURE, UV+vec2(blur_size,-blur_size));
-			 col += texture(TEXTURE, UV+vec2(blur_size,blur_size));
-			 col += texture(TEXTURE, UV+vec2(-blur_size,blur_size));   
-			col = col / 8.0;
-		}
+void fragment() {
+	vec2 range = TEXTURE_PIXEL_SIZE ;
+	vec4 col = texture(TEXTURE, UV);
+	col += texture(TEXTURE, UV+range*lod);
+	col += texture(TEXTURE, UV-range*lod);
+	col += texture(TEXTURE, UV-vec2(range.x,-range.y)*lod);
+	col += texture(TEXTURE, UV+vec2(range.x,-range.y)*lod);
+	col += texture(TEXTURE, UV-vec2(-range.x,range.y)*lod);
+	col += texture(TEXTURE, UV+vec2(-range.x,range.y)*lod);
+	col = col/7.0;
+	COLOR = col;
+}
 
     //divide the sum of values by the amount of samples
     
-    COLOR = col;
 
-	}"
+	"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/blur_size = -0.001
-shader_param/range = 4.0
+shader_param/lod = 0.683
 
 [node name="Space" type="Node2D"]
 
@@ -46,11 +41,10 @@ shader_param/range = 4.0
 
 [node name="ground_texture_1" type="Sprite" parent="GroundLayer"]
 material = SubResource( 2 )
-scale = Vector2( 4, 4 )
+scale = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 
 [node name="BubbleLayer" type="Node2D" parent="."]
-visible = false
 modulate = Color( 0.360784, 0.498039, 0.54902, 1 )
 
 [node name="Bubble" parent="BubbleLayer" instance=ExtResource( 3 )]
@@ -72,8 +66,7 @@ position = Vector2( -2197.06, -1154.31 )
 position = Vector2( -414.822, -100.62 )
 
 [node name="WaterLayer" type="Node2D" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0.843137 )
+modulate = Color( 0.203922, 0.847059, 0.803922, 0.870588 )
 
 [node name="TextureRect" type="TextureRect" parent="WaterLayer"]
 margin_left = -3000.0
