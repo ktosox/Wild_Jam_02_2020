@@ -25,3 +25,17 @@ rotation = 1.5708
 
 [node name="Organelle4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 94.1372, 41.3933 )
+
+[node name="Organelle8" parent="." instance=ExtResource( 4 )]
+position = Vector2( -168.128, -85.3291 )
+rotation = 1.5708
+
+[node name="Organelle7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 102.485, -87.6698 )
+
+[node name="Organelle6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 49.405, 147.621 )
+rotation = 1.5708
+
+[node name="Organelle5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 39.9874, -167.606 )

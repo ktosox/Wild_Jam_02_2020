@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GameParts/Organelle.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Particles/smoke1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Particles/smoke3.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Audio/impact5.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 20.0
+radius = 25.0
 height = 30.0
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -35,4 +36,7 @@ texture = ExtResource( 2 )
 modulate = Color( 1, 1, 1, 0.431373 )
 scale = Vector2( -0.16, 0.24 )
 texture = ExtResource( 3 )
+
+[node name="Bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="body_entered" from="BallRange" to="." method="_on_BallRange_body_entered"]

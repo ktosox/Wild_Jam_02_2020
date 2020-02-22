@@ -17,7 +17,11 @@ func _ready():
 
 
 func _on_BallRange_body_entered(body):
-	print("bump")
 	var dir = body.global_position-global_position
+	body.apply_impulse(Vector2(),-dir)
 	constant_linear_velocity = dir*12
+	$Bump.pitch_scale = 1 + 0.07*(randf()-0.5)
+	$Bump.play()
+	GM.update_points(60)
+	#$Crash.play()
 	pass # Replace with function body.
