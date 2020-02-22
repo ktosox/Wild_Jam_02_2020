@@ -5,9 +5,9 @@ extends RigidBody2D
 # var a = 2
 # var b = "text"
 var direction
-export var launchReady = true
+export var launchReady = false
 export var fireStrenght = 0.0
-export var stoped = true
+export var stoped = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,7 +30,10 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
+	if(!stoped and linear_velocity.length()<1):
+		launchReady = true
+		stoped = true
+		modulate = Color(1,0,0)
 	pass
 
 

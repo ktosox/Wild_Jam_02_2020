@@ -43,19 +43,19 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "Fire"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:launchReady")
+tracks/0/path = NodePath("Range:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Range:scale")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -63,34 +63,34 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.1, 0.1 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "fire_player"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:fireStrenght")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:fireStrenght")
+tracks/3/path = NodePath(".:stoped")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2.3 ),
 "transitions": PoolRealArray( 1, 0.5 ),
 "update": 0,
-"values": [ 0.0, 1500.0 ]
+"values": [ 0.0, 640.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Launcher:current_animation")
@@ -133,12 +133,24 @@ tracks/2/keys = {
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:launchReady")
+tracks/3/path = NodePath(".:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:launchReady")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -153,6 +165,7 @@ gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 3.0
 script = ExtResource( 1 )
+fireStrenght = 640.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotating = true
@@ -176,5 +189,4 @@ anims/Fire = SubResource( 4 )
 anims/Pull = SubResource( 5 )
 
 [node name="Range" type="Sprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 4 )
